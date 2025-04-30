@@ -1,0 +1,294 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+h1, h2, h3, h4, h5, h6, div, p, span, button, a, input, select, option, textarea {
+ font-family: "Montserrat", sans-serif !important;
+}
+
+.header-link {
+font-weight: 600;
+}
+</style>
+
+<!-- START Personalize by adding first name  -->
+<script>
+  //when the page fully loads, run the following function
+  $(document).ready(function() {
+    var welcomeMessageBefore = "Hi, ";
+    var welcomeMessageAfter = "!";
+    
+    if(typeof skilljarUser !== 'undefined' && skilljarUser.firstName.length <= 15 && skilljarUser.firstName.length > 1){
+        $('.first-name').html(welcomeMessageBefore + skilljarUser.firstName + welcomeMessageAfter);
+        $('.first-name').css('display', 'inline-block');
+        $('.first-name').css('color', 'inherit');
+        $('.first-name').css('margin-right', '5px');
+    }
+    else{
+      $('.first-name').css('display', 'none');
+    }
+  });
+</script>
+<!-- END Personalize by adding first name  -->
+<!-- START add scroll to top button to entire site -->
+<style>
+button#back-to-top-btn {
+  z-index: 99;
+  position: fixed;
+  bottom: 44px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  padding: 0px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  box-shadow: 0px 0px 5px 1px #d8d8d8;
+  justify-content: center;
+}
+button#back-to-top-btn i {
+  font-size: 18px;
+  color: #0066cc;
+} 
+</style>
+<script>
+/* only run logic to add button if on Page object. */
+$('body').append('<button id="back-to-top-btn" class="hidden"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>');
+// Select the button
+const backToTopButton = document.querySelector("#back-to-top-btn");
+// Add an event listener to the window scroll event
+window.addEventListener("scroll", () => {
+  // Get the current scroll position
+  let currentScrollPosition = window.pageYOffset;
+
+  // If the user has scrolled up and the button is hidden, show it
+  if (currentScrollPosition > 0 && backToTopButton.classList.contains("hidden")) {
+    backToTopButton.classList.remove("hidden");
+    $('#back-to-top-btn').fadeToggle( "400", "linear" );
+  } 
+  // If the user has not scrolled up and the button is not hidden, hide it
+  else if (currentScrollPosition <= 0 && !backToTopButton.classList.contains("hidden")) {
+    backToTopButton.classList.add("hidden");
+    $('#back-to-top-btn').fadeToggle( "400", "linear" );
+  }
+});
+
+// Add an event listener to the button click event
+backToTopButton.addEventListener("click", () => {
+  // Scroll back to the top of the page
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth"
+  });
+});
+
+</script>
+<!-- END add scroll to top button to entire site -->
+
+<!-- START Customize Text On Error/404 Page -->
+<script>
+$(document).ready(function () {
+  if($('.sj-page-error-404').length){
+    /* Change the 'pageNotFoundMessage' variable value to your desired error title */
+    var pageNotFoundMessage = 'Page error';
+    /* Change the 'errorExplanation' variable value to your desired error description */
+    var errorExplanation = 'You don't have permission to access to this content or the link is invalid.<br><br><a href="/">Go back to Home</a>';
+    
+    $(".sj-text-page-not-found span").html(pageNotFoundMessage)
+    $(".sj-text-page-not-found-explanation span").html(errorExplanation)
+  }
+});
+</script>
+<style>
+  /* styling for the error title */
+.sj-page-error #skilljar-content h1{
+  color: #222;
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0 0 15px;
+}
+/* styling for the error description */
+.sj-page-error #skilljar-content p {
+    font-size: 18px;
+    line-height: 22px;
+}
+</style>
+<!-- END Customize Text On Error/404 Page -->
+
+<!-- START Change Course Detail Curriculum Page Lessons into Links -->
+<script>
+$(document).ready(function() {
+  $('.dp-curriculum > li:not(.section)').each(function() {
+    var url = $(this).attr('data-url') + '?reg=1';
+    $(this).children().wrapAll('<a href="' + url + '"></a>');
+  });
+});
+</script>
+<!-- END Change Course Detail Curriculum Page Lessons into Links -->
+
+<style>
+.dp-curriculum > li:not(.section) > a {
+  font-size: 15px;
+  color: #e33b8c;
+}
+</style>
+
+<style>
+/* Set a maximum width for the main lesson content area */
+#lesson-main-content {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Set a maximum width for the lesson title area */
+.lesson-top {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<style>
+/* START Style for sjwc-section-title - Final Adjustments */
+h3.sjwc-section-title {
+  background-color: transparent !important; /* Plain background */
+  border-bottom: none !important; /* Remove any default bottom borders on h3 */
+  padding: 0 !important; /* Remove any default padding */
+  margin-top: 28.125px !important; /* Increased top margin by 25% (22.5px * 1.25) */
+  margin-bottom: 45px !important; /* Bottom margin */
+  width: fit-content !important;
+  font-size: 26px !important; /* Large text */
+  font-weight: 500 !important; /* Medium 500 text */
+  font-family: 'Montserrat', sans-serif !important; /* Ensure Montserrat is used */
+  position: relative !important; /* Needed for absolute positioning of the bar */
+}
+
+h3.sjwc-section-title::after {
+  content: '';
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -28.6px !important; /* Increased space by 30% (-22px * 1.3) */
+  display: block !important;
+  width: 100px !important; /* Doubled width of the bar */
+  height: 8px !important; /* Increased thickness by 3px (5px + 3px) */
+  background-color: #cecce6 !important; /* Bar color */
+  border-radius: 5px !important; /* Rounded corners */
+}
+/* END Style for sjwc-section-title - Final Adjustments */
+</style>
+
+<style>
+/* START Add softer drop shadow to the left navigation sidebar */
+#lp-left-nav {
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1); /* Softer drop shadow */
+}
+/* END Add softer drop shadow to the left navigation sidebar */
+</style>
+
+<style>
+/* START Style for lesson sidebar */
+
+/* General styling for all lesson items (default white background and black text) */
+#lp-left-nav a.lesson {
+  display: block !important;
+  padding: 10px 15px !important;
+  margin-bottom: 5px !important;
+  text-decoration: none !important;
+  color: #000 !important; /* Black text for unselected */
+  background-color: #fff !important; /* White background for unselected */
+  border-radius: 5px !important;
+  position: relative; /* For positioning the number */
+  padding-left: 30px !important; /* Add space for the number */
+}
+
+/* Styling for hovered lesson items (lighter blue background and white text) */
+#lp-left-nav a.lesson:hover {
+  background-color: #2e3051 !important;
+  color: #fff !important; /* White text on hover */
+  cursor: pointer !important;
+}
+
+/* Make the number white on hover */
+#lp-left-nav a.lesson:hover .lesson-number {
+  color: #fff !important;
+}
+
+/* Styling for active/selected lesson items (dark blue background and black text by default) */
+#lp-left-nav .lesson-active,
+#lp-left-nav a.lesson.lesson-active,
+#lp-left-nav .current-item {
+  color: #000 !important; /* Black text for selected when not hovered */
+  font-weight: bold !important; /* Make the font bold when active */
+  /* Removed the problematic background: #8f8dc2; */
+}
+
+/* Force transparency on the active lesson to remove the box */
+#lp-left-nav .lesson-active {
+  background-color: transparent !important;
+}
+
+/* Make selected lesson text white on hover */
+#lp-left-nav .lesson-active:hover,
+#lp-left-nav a.lesson.lesson-active:hover,
+#lp-left-nav .current-item:hover {
+  color: #fff !important; /* White text on hover for selected */
+  font-weight: normal !important; /* Revert to normal font weight on hover */
+}
+
+/* You might also want to style elements within the lesson-row for better visual distinction */
+#lp-left-nav a.lesson .lesson-row {
+  display: flex !important;
+  align-items: center !important;
+}
+
+#lp-left-nav a.lesson .bullet {
+  display: none !important; /* Hide the original bullet */
+  margin-right: 10px !important; /* Keep for potential spacing adjustments */
+}
+
+#lp-left-nav a.lesson .type-icon {
+  margin-right: 10px !important;
+}
+
+#lp-left-nav a.lesson .title {
+  flex-grow: 1 !important;
+}
+
+/* Lighten the right sidebar border */
+#lp-left-nav {
+  border-right-color: #e0e0e0 !important; /* Example: Light grey */
+}
+
+/* Style for the generated numbers */
+.lesson-number {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  font-size: 0.9em;
+  color: #333; /* Adjust color */
+  width: 20px; /* Adjust width for alignment */
+  text-align: right;
+  transition: color 0.3s ease-in-out; /* Optional: Add a smooth transition */
+}
+
+/* END Style for lesson sidebar */
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const lessonItems = document.querySelectorAll('#lp-left-nav a.lesson');
+
+  lessonItems.forEach((lesson, index) => {
+    const numberSpan = document.createElement('span');
+    numberSpan.textContent = `${index + 1}.`;
+    numberSpan.classList.add('lesson-number');
+    lesson.appendChild(numberSpan);
+  });
+});
+</script>
