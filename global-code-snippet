@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6, div, p, span, button, a, input, select, option, textarea
 .course-title {
   position: relative;
   font-weight: 600 !important;
-  margin-bottom: 10px
+  margin-bottom: 15px !important;
 }
 
 .course-title::after {
@@ -192,11 +192,39 @@ $(document).ready(function() {
 <!-- END Change Course Detail Curriculum Page Lessons into Links -->
 
 <style>
+.dp-summary-wrapper > h1 {
+  font-weight: 600;
+}
+
+.dp-summary-wrapper {
+  border: none !important;
+}
+
+.top-row-grey.top-row-white-v2.padding-top.padding-side.row-v2 .dp-row-flex-v2 {
+  justify-content: space-between;
+  flex-direction: row-reverse !important;
+}
+
+#dp-details .row.hide-for-small.padded-side-bottom {
+  display: flex !important;
+  flex-direction: row-reverse;
+}
+
+#dp-details .row.hide-for-small.padded-side-bottom .large-7.columns {
+  padding: 0 40px 40px 40px !important;
+}
+
 .dp-curriculum {
-width: 50%;
 background-color: #f7f6fb;
 border-radius: 10px;
-padding: 20px !important;
+padding: 25px !important;
+}
+
+.dp-long-description {
+  background-color: #0f9bd7; 
+  padding: 25px !important;
+  color: #fff; 
+  border-radius: 10px;
 }
 
 .section-container .title > .focus-link-v2 {
@@ -258,6 +286,20 @@ padding-left: 0 !important
 }
 }
 
+.catalog-header > h3 {
+  position: relative;
+  margin-bottom: 15px !important;
+}
+
+.catalog-header > h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0; 
+  width: 10%; 
+  border-bottom: 5px solid black;
+}
+
 /* Add line under lesson title */
 .lesson-top::after {
   content: "";
@@ -274,6 +316,10 @@ padding-left: 0 !important
 
 .lesson-row .title {
   left: 50px !important;
+}
+
+.unviewed-lesson {
+  color: #181937; 
 }
 </style>
 
@@ -417,4 +463,19 @@ document.addEventListener('DOMContentLoaded', function() {
     lesson.appendChild(numberSpan);
   });
 });
+</script>
+
+/* Add styling for unviewed lessons */
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.lesson-row').forEach(row => {
+      const bullet = row.querySelector('.bullet');
+      const icon = bullet?.querySelector('i');
+      const title = row.querySelector('.title');
+
+      if (icon && icon.classList.contains('unviewed') && title) {
+        title.classList.add('unviewed-lesson');
+      }
+    });
+  });
 </script>
