@@ -5,8 +5,70 @@ h1, h2, h3, h4, h5, h6, div, p, span, button, a, input, select, option, textarea
  font-family: "Montserrat", sans-serif !important;
 }
 
+.course-title {
+  position: relative;
+  font-weight: 600 !important;
+  margin-bottom: 10px
+}
+
+.course-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; 
+  left: 0;
+  width: 10%; 
+  border-bottom: 5px solid black;
+}
+
+#header {
+box-shadow: 4px 1px 10px #c7c6cb;
+height: 75px;
+}
+
+#header-right {
+display: flex;
+align-items: center;
+}
+
+.header-links-container  {
+display: flex !important;
+align-items: center;
+
+a:nth-of-type(4) {
+  display: flex;
+  align-items: center;
+  background-color: #f8c521;
+  padding: 4px 12px;
+  border-radius: 0.25rem;
+  height: 2rem;
+ }
+}
+
+.headerheight {
+height: unset !important;
+}
+
+@media (max-width: 873px) {
+  .header-links-container {
+    display: none  !important;
+  }
+}
+
 .header-link {
 font-weight: 600;
+}
+
+.header-dropdown-button-v2 {
+border-left: 1.5px solid rgb(211, 209, 206) !important;
+padding-left: 15px  !important;
+}
+
+.header-center-img {
+max-height: 40px !important;
+}
+
+.button {
+border-radius: 40px;
 }
 </style>
 
@@ -130,9 +192,49 @@ $(document).ready(function() {
 <!-- END Change Course Detail Curriculum Page Lessons into Links -->
 
 <style>
+.dp-curriculum {
+width: 50%;
+background-color: #f7f6fb;
+border-radius: 10px;
+padding: 20px !important;
+}
+
+.section-container .title > .focus-link-v2 {
+  font-size: 20px !important;
+  font-weight: 600;
+  padding-left: 0 !important;
+  padding-bottom: 18px !important;
+}
+
+.section-container .content { 
+  border: none !important;
+}
+.section-container > section:nth-of-type(2) > p {
+left: 150px !important
+}
+
+/* Add underline to active tab */
+.section-container > section.active > p {
+  border: none !important; 
+}
+
+/* Add underline to active tab */
+.section-container > section.active > p > a {
+  border-bottom: 4px solid #1b1a3a !important; 
+}
+
+.top-row, .top-row-grey  {
+margin-top: 20px !important
+}
+
+.content {
+padding-left: 0 !important
+}
+
 .dp-curriculum > li:not(.section) > a {
-  font-size: 15px;
-  color: #e33b8c;
+  font-size: 18px;
+  color: #1b1a3a;
+  font-weight: 500;
 }
 </style>
 
@@ -149,6 +251,29 @@ $(document).ready(function() {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  border-bottom: none !important;
+
+> h2 {
+  font-weight: 500 !important;
+}
+}
+
+/* Add line under lesson title */
+.lesson-top::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0; 
+  width: 10%; 
+  border-bottom: 5px solid black;
+}
+
+.lesson-row .type-icon {
+  display: none !important;
+}
+
+.lesson-row .title {
+  left: 50px !important;
 }
 </style>
 
@@ -183,8 +308,8 @@ h3.sjwc-section-title::after {
 
 <style>
 /* START Add softer drop shadow to the left navigation sidebar */
-#lp-left-nav {
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1); /* Softer drop shadow */
+.lp-left-nav {
+    box-shadow: 4px 1px 10px #c7c6cb;
 }
 /* END Add softer drop shadow to the left navigation sidebar */
 </style>
@@ -259,8 +384,9 @@ h3.sjwc-section-title::after {
 }
 
 /* Lighten the right sidebar border */
-#lp-left-nav {
+.lp-left-nav {
   border-right-color: #e0e0e0 !important; /* Example: Light grey */
+  padding: 15px;
 }
 
 /* Style for the generated numbers */
