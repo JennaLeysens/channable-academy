@@ -164,7 +164,39 @@ $(document).ready(function () {
   }
 });
 </script>
+
+/* Add progress bar to lesson footer */
+<script> 
+$(document).ready(function() {
+  $('.next-lesson-button').each(function() {
+    // Create the full progress bar structure with the span inside
+    var progressBar = $(
+      '<div class="progress-bar">' +
+        '<span class="progress-bar-inner button-background" style="width: 15%;" aria-valuemin="0" aria-valuemax="100" aria-valuenow="15" role="progressbar"></span>' +
+      '</div>'
+    );
+
+    // Append to the current .next-lesson-button
+    $(this).append(progressBar);
+  });
+});
+</script>
+
 <style>
+
+/* Course progress styling */
+.cp-summary-wrapper {
+  border: none;
+}
+
+.button-background {
+  background-color: #0f9bd7;
+}
+
+.button-border-color {
+  border-color: #0f9bd7;
+}
+
   /* styling for the error title */
 .sj-page-error #skilljar-content h1{
   color: #222;
@@ -214,6 +246,17 @@ $(document).ready(function() {
   padding: 0 40px 40px 40px !important;
 }
 
+.push-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  left: unset;
+}
+
+.pull-8 {
+  right: unset;
+}
+
 .dp-curriculum {
 background-color: #f7f6fb;
 border-radius: 10px;
@@ -225,6 +268,10 @@ padding: 25px !important;
   padding: 25px !important;
   color: #fff; 
   border-radius: 10px;
+}
+
+.dp-long-description > h3 {
+    color: #fff; 
 }
 
 .section-container .title > .focus-link-v2 {
@@ -335,13 +382,23 @@ padding-left: 0 !important
   height: 80px;
   background-color: #F7F6FB !important;
   border: none !important;
+  padding: 0px 24px;
+}
+
+#lp-footer:has(> :nth-child(2):last-child) {
+  justify-content: flex-end; 
 }
 
 #lp-footer .left .prev-lesson-button {
-  background-color: #8f8dc2;
+  background-color: #cfcde6;
   border-radius: 5px;
-  padding: 10px;
+  padding: 12px;
+  line-height: unset;
 }
+
+#lp-footer .left .prev-lesson-button > .button-content > .lesson-title-label {
+  display: none;
+  }
 
 #lp-footer .left .prev-lesson-button .button-content > span > span {
   color: #fff !important;
@@ -357,9 +414,10 @@ padding-left: 0 !important
   background-color: #0f9bd7;
   font-weight: 600;
   border-radius: 5px;
-  padding: 10px;
+  padding: 12px;
   border: none;
   width: 100px;
+  font-size: 16px;
 }
 </style>
 
@@ -401,7 +459,7 @@ h3.sjwc-section-title::after {
 </style>
 
 <style>
-/* START Style for lesson sidebar */
+/* Style for lesson sidebar */
 
 /* General styling for all lesson items (default white background and black text) */
 #lp-left-nav a.lesson {
