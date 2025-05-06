@@ -321,6 +321,46 @@ padding-left: 0 !important
 .unviewed-lesson {
   color: #181937; 
 }
+
+#resume-button .resume-button {
+  background-color: #0f9bd7;
+}
+
+/* Lesson footer styling */
+#lp-footer {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+  height: 80px;
+  background-color: #F7F6FB !important;
+  border: none !important;
+}
+
+#lp-footer .left .prev-lesson-button {
+  background-color: #8f8dc2;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#lp-footer .left .prev-lesson-button .button-content > span > span {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+#lp-footer .left .prev-lesson-button .button-content > i {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+#lp-footer .right .next-lesson-button .next-lesson-link {
+  background-color: #0f9bd7;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  width: 100px;
+}
 </style>
 
 <style>
