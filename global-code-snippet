@@ -25,6 +25,10 @@ box-shadow: 4px 1px 10px #c7c6cb;
 height: 75px;
 }
 
+#header-left {
+  padding-left: 22px !important
+}
+
 #header-right {
 display: flex;
 align-items: center;
@@ -182,6 +186,16 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+$(document).ready(function () {
+  var $progress = $('.progress-bar.button-border-color');
+  var $lessons = $('.cp-lessons');
+
+  if ($progress.length && $lessons.length) {
+    $progress.insertBefore($lessons); // Move the progress bar before the lessons <h2>
+  }
+});
+</script>
 <style>
 
 /* Course progress styling */
@@ -189,12 +203,40 @@ $(document).ready(function() {
   border: none;
 }
 
+.cp-lessons {
+  color: #1484ba;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
 .button-background {
   background-color: #0f9bd7;
 }
 
-.button-border-color {
-  border-color: #0f9bd7;
+#path-curriculum-progress-bar-annotation-text {
+  color: #0f9bd7;
+  font-weight: 600;
+}
+
+#path-curriculum-progress-bar {
+  border: none; 
+  background-color: #e9e8f3;
+}
+
+#path-curriculum-progress-bar .button-background {
+  background: #0f9bd7 !important; 
+}
+
+.progress-bar {
+  background: #e9e8f3 !important;
+  border-radius: 4px;
+  border: none !important;
+  height: 8px !important;
+}
+
+.progress-bar-inner {
+  height: 8px !important;
+  border-radius: 4px;
 }
 
   /* styling for the error title */
@@ -220,6 +262,7 @@ $(document).ready(function() {
     $(this).children().wrapAll('<a href="' + url + '"></a>');
   });
 });
+
 </script>
 <!-- END Change Course Detail Curriculum Page Lessons into Links -->
 
@@ -369,6 +412,14 @@ padding-left: 0 !important
   color: #181937; 
 }
 
+#resume-button {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-left: 0; 
+  margin-right: 0;
+}
+
 #resume-button .resume-button {
   background-color: #0f9bd7;
 }
@@ -411,6 +462,7 @@ padding-left: 0 !important
 }
 
 #lp-footer .right .next-lesson-button .next-lesson-link {
+  position: relative;
   background-color: #0f9bd7;
   font-weight: 600;
   border-radius: 5px;
@@ -418,6 +470,20 @@ padding-left: 0 !important
   border: none;
   width: 100px;
   font-size: 16px;
+}
+
+#lp-footer .right .next-lesson-button .next-lesson-link > span {
+  margin-right: 10px;
+}
+
+.next-lesson-link::after {
+  content: ">"; /* Adds the ">" symbol */
+  position: absolute;
+  right: 15px; /* Position the ">" symbol towards the right inside the button */
+  top: 50%; /* Vertically center it */
+  transform: translateY(-50%); /* Vertically align the ">" symbol */
+  font-size: 18px; /* Adjust the size of the symbol */
+  color: #fff; /* Set the color of the symbol */
 }
 </style>
 
