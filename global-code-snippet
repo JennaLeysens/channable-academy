@@ -62,6 +62,10 @@ height: unset !important;
 font-weight: 600;
 }
 
+.header-link.active-link {
+  color: #8f8dc2;
+}
+
 .header-dropdown-button-v2 {
 border-left: 1.5px solid rgb(211, 209, 206) !important;
 padding-left: 15px  !important;
@@ -75,6 +79,15 @@ max-height: 40px !important;
 border-radius: 40px;
 }
 </style>
+<script>
+$(document).ready(function () {
+  $('.header-link').each(function () {
+    if (this.href === window.location.href) {
+      $(this).addClass('active-link');
+    }
+  });
+});
+</script>
 
 <!-- START Personalize by adding first name  -->
 <script>
@@ -171,19 +184,35 @@ $(document).ready(function () {
 
 <!-- Add progress bar to lesson footer -->
 <script> 
-$(document).ready(function() {
-  $('.next-lesson-button').each(function() {
+$(document).ready(function () {
+  $('.next-lesson-button').each(function () {
     // Create the full progress bar structure with the span inside
-    var progressBar = $(
-      '<div class="progress-bar">' +
-        '<span class="progress-bar-inner button-background" style="width: 15%;" aria-valuemin="0" aria-valuemax="100" aria-valuenow="15" role="progressbar"></span>' +
-      '</div>'
-    );
+    var $progressBarInner = $('<span>', {
+      class: 'progress-bar-inner button-background',
+      style: 'width: 15%;',
+      'aria-valuemin': 0,
+      'aria-valuemax': 100,
+      'aria-valuenow': 15,
+      role: 'progressbar'
+    });
 
-    // Append to the current .next-lesson-button
-    $(this).append(progressBar);
+    var $progressBar = $('<div>', { class: 'progress-bar' }).append($progressBarInner);
+    $(this).append($progressBar);
+
+    // Set up MutationObserver for aria-valuenow
+    const observer = new MutationObserver(function (mutationsList) {
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'aria-valuenow') {
+          const newValue = $progressBarInner.attr('aria-valuenow');
+          $progressBarInner.css('width', newValue + '%');
+        }
+      }
+    });
+
+    observer.observe($progressBarInner[0], { attributes: true });
   });
 });
+
 </script>
 
 <script>
@@ -201,6 +230,10 @@ $(document).ready(function () {
 /* Course progress styling */
 .cp-summary-wrapper {
   border: none;
+}
+
+.cp-summary-wrapper h1 {
+  font-weight: 500;
 }
 
 .cp-lessons {
@@ -280,6 +313,10 @@ $(document).ready(function() {
   flex-direction: row-reverse !important;
 }
 
+#dp-details h3 {
+  font-weight: 500;
+}
+
 #dp-details .row.hide-for-small.padded-side-bottom {
   display: flex !important;
   flex-direction: row-reverse;
@@ -342,11 +379,16 @@ left: 150px !important
 }
 
 .top-row, .top-row-grey  {
-margin-top: 20px !important
+  margin-top: 20px !important;
+  padding-bottom: 0;
 }
 
 .content {
 padding-left: 0 !important
+}
+
+.lessons-wrapper {
+  margin-top: 10px;  
 }
 
 .dp-curriculum > li:not(.section) > a {
@@ -376,6 +418,15 @@ padding-left: 0 !important
 }
 }
 
+.filter-group-title {
+  margin-top: 20px;
+}
+
+#catalogSearchInput {
+  border-radius: 8px;  
+  border: 1.5px solid #ccc;
+}
+
 .catalog-header > h3 {
   position: relative;
   margin-bottom: 15px !important;
@@ -400,6 +451,15 @@ padding-left: 0 !important
   border-bottom: 5px solid black;
 }
 
+.lesson-row.lesson-active + .lesson-number {
+  color: #000 !important;
+  font-weight: 700;
+}
+
+.lesson-complete .lesson-number {
+  color: #aba9d1;
+}
+
 .lesson-row .type-icon {
   display: none !important;
 }
@@ -412,12 +472,29 @@ padding-left: 0 !important
   color: #181937; 
 }
 
+.start-button {
+  font-weight: 500 !important;
+  padding-left: 20px;
+  padding-right: 35px;
+}
+
+.start-button::after {
+  content: ">"; 
+  position: absolute;
+  right: 15px; /* Position the ">" symbol towards the right inside the button */
+  top: 50%; /* Vertically center it */
+  transform: translateY(-50%); /* Vertically align the ">" symbol */
+  font-size: 18px; /* Adjust the size of the symbol */
+  color: #fff; /* Set the color of the symbol */
+}
+
 #resume-button {
   display: flex;
   align-items: flex-start;
   width: 100%;
   margin-left: 0; 
   margin-right: 0;
+  font-weight: 500 !important;  
 }
 
 #resume-button .resume-button {
@@ -431,7 +508,7 @@ padding-left: 0 !important
    align-items: center;
    justify-content: space-between;
   height: 80px;
-  background-color: #F7F6FB !important;
+  background-color: #f6f6fa !important;
   border: none !important;
   padding: 0px 24px;
 }
@@ -477,7 +554,7 @@ padding-left: 0 !important
 }
 
 .next-lesson-link::after {
-  content: ">"; /* Adds the ">" symbol */
+  content: ">"; 
   position: absolute;
   right: 15px; /* Position the ">" symbol towards the right inside the button */
   top: 50%; /* Vertically center it */
@@ -533,22 +610,20 @@ h3.sjwc-section-title::after {
   padding: 10px 15px 10px 0 !important;
   margin-bottom: 5px !important;
   text-decoration: none !important;
-  color: #000 !important; /* Black text for unselected */
   background-color: #fff !important; /* White background for unselected */
   border-radius: 5px !important;
   position: relative; /* For positioning the number */
+  transition: background-color 0.3s ease;
+}
+
+.lesson-incomplete {
+  color: #000 !important;
 }
 
 /* Styling for hovered lesson items (lighter blue background and white text) */
 #lp-left-nav a.lesson:hover {
-  background-color: #2e3051 !important;
-  color: #fff !important; /* White text on hover */
+  background-color: #cfcde4 !important;
   cursor: pointer !important;
-}
-
-/* Make the number white on hover */
-#lp-left-nav a.lesson:hover .lesson-number {
-  color: #fff !important;
 }
 
 /* Styling for active/selected lesson items (dark blue background and black text by default) */
@@ -556,21 +631,13 @@ h3.sjwc-section-title::after {
 #lp-left-nav a.lesson.lesson-active,
 #lp-left-nav .current-item {
   color: #000 !important; /* Black text for selected when not hovered */
-  font-weight: bold !important; /* Make the font bold when active */
+  font-weight: 700 !important; /* Make the font bold when active */
   /* Removed the problematic background: #8f8dc2; */
 }
 
 /* Force transparency on the active lesson to remove the box */
 #lp-left-nav .lesson-active {
   background-color: transparent !important;
-}
-
-/* Make selected lesson text white on hover */
-#lp-left-nav .lesson-active:hover,
-#lp-left-nav a.lesson.lesson-active:hover,
-#lp-left-nav .current-item:hover {
-  color: #fff !important; /* White text on hover for selected */
-  font-weight: normal !important; /* Revert to normal font weight on hover */
 }
 
 /* You might also want to style elements within the lesson-row for better visual distinction */
@@ -600,7 +667,7 @@ h3.sjwc-section-title::after {
 /* Style for the generated numbers */
 .lesson-number {
   position: absolute;
-  left: 70px;
+  left: 52px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.9em;
