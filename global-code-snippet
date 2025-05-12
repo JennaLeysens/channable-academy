@@ -227,6 +227,14 @@ $(document).ready(function () {
 </script>
 <style>
 
+.course-overview__content__lesson__type-icon {
+  display: none;
+}
+
+.course-overview__content__lesson__title {
+  margin-left: 12px;
+}
+
 /* Course progress styling */
 .cp-summary-wrapper {
   border: none;
@@ -234,6 +242,18 @@ $(document).ready(function () {
 
 .cp-summary-wrapper h1 {
   font-weight: 500;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+/* Add line under lesson title */
+.cp-summary-wrapper h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0; 
+  width: 70px; 
+  border-bottom: 5px solid black;
 }
 
 .cp-lessons {
@@ -302,6 +322,17 @@ $(document).ready(function() {
 <style>
 .dp-summary-wrapper > h1 {
   font-weight: 600;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.dp-summary-wrapper > h1::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0; 
+  width: 70px; 
+  border-bottom: 5px solid black;
 }
 
 .dp-summary-wrapper {
@@ -425,6 +456,14 @@ padding-left: 0 !important
 #catalogSearchInput {
   border-radius: 8px;  
   border: 1.5px solid #ccc;
+}
+
+#catalog-filter-menu .margin-bottom {
+  font-weight: 500;
+}
+
+#catalog-left-nav {
+  padding: 25px 20px;  
 }
 
 .catalog-header > h3 {
@@ -706,4 +745,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+</script>
+
+<script>
+$(document).ready(function () {
+  $('.fa .course-overview__content__lesson__complete-icon .fa-circle-o.unviewed').each(function () {
+    $(this).closest('a').addClass('has-unviewed');
+  });
+});
 </script>
