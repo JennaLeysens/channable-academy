@@ -183,38 +183,38 @@ $(document).ready(function () {
 </script>
 
 <!-- Add progress bar to lesson footer -->
-<script> 
+<script>
 $(document).ready(function () {
   $('.next-lesson-button').each(function () {
-    // Create the full progress bar structure with the span inside
+    // Create progress bar structure
     var $progressBarInner = $('<span>', {
       class: 'progress-bar-inner button-background',
-      style: 'width: 15%;',
+      style: 'width: 0%;',
       'aria-valuemin': 0,
       'aria-valuemax': 100,
-      'aria-valuenow': 15,
+      'aria-valuenow': 0,
       role: 'progressbar'
     });
 
     var $progressBar = $('<div>', { class: 'progress-bar' }).append($progressBarInner);
     $(this).append($progressBar);
 
-    // Set up MutationObserver for aria-valuenow
-    const observer = new MutationObserver(function (mutationsList) {
-      for (let mutation of mutationsList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'aria-valuenow') {
-          const newValue = $progressBarInner.attr('aria-valuenow');
-          $progressBarInner.css('width', newValue + '%');
-        }
-      }
-    });
+    // Count total and completed lessons
+    var $wrapper = $('.lessons-wrapper');
+    var totalLessons = $wrapper.find('a').length;
+    var completedLessons = $wrapper.find('a.lesson-complete').length;
 
-    observer.observe($progressBarInner[0], { attributes: true });
+    // Calculate percentage
+    var progress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+    console.log('Total:', totalLessons, 'Completed:', completedLessons, 'Progress:', progress + '%');
+
+    // Update progress bar
+    $progressBarInner.attr('aria-valuenow', progress);
+    $progressBarInner.css('width', progress + '%');
   });
 });
-
 </script>
-
 <script>
 $(document).ready(function () {
   var $progress = $('.progress-bar.button-border-color');
@@ -226,6 +226,30 @@ $(document).ready(function () {
 });
 </script>
 <style>
+.sj-ribbon.sj-course-ribbon.sj-ribbon-registered.sj-course-ribbon-registered {
+  border: none !important; 
+  background-color: #0f9bd7 !important; 
+  color: #fff !important; 
+}
+
+.sj-ribbon.sj-ribbon-registered {
+  border: none !important; 
+  background-color: #0f9bd7 !important; 
+  color: #fff !important; 
+}
+
+.sj-ribbon.sj-course-ribbon.sj-ribbon-complete.sj-course-ribbon-complete { 
+  color: #fff;
+}
+
+.catalog-lower-cta-button {
+  border-radius: 40px !important;
+  transition: background-color 300ms ease-out;
+}
+
+.catalog-lower-cta-button:hover {
+  background-color: #8f8dc2 !important;
+}
 
 .course-overview__content__lesson__type-icon {
   display: none;
@@ -292,6 +316,10 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
+.sj-page-curriculum #cp-content .tabs-wrapper-v2 {
+  padding-left: .9375em !important;
+}
+
   /* styling for the error title */
 .sj-page-error #skilljar-content h1{
   color: #222;
@@ -351,6 +379,7 @@ $(document).ready(function() {
 #dp-details .row.hide-for-small.padded-side-bottom {
   display: flex !important;
   flex-direction: row-reverse;
+  justify-content: left;
 }
 
 #dp-details .row.hide-for-small.padded-side-bottom .large-7.columns {
@@ -422,6 +451,14 @@ padding-left: 0 !important
   margin-top: 10px;  
 }
 
+.facebook-button-wrapper {
+display: none !important;
+}
+
+.twitter-button-wrapper {
+display: none !important;
+}
+
 .dp-curriculum > li:not(.section) > a {
   font-size: 18px;
   color: #1b1a3a;
@@ -463,7 +500,7 @@ padding-left: 0 !important
 }
 
 #catalog-left-nav {
-  padding: 25px 20px;  
+  padding: 25px 25px;  
 }
 
 .catalog-header > h3 {
@@ -754,3 +791,78 @@ $(document).ready(function () {
   });
 });
 </script>
+
+<!-- START Add View Certificate and add to LinkedIn button to lesson -->
+<style>
+/* Style the button container */
+div#certificate-buttons-container {
+  display: none;
+  justify-content: center;
+  padding: 15px 24px;
+  gap: 20px;
+}
+
+/* Style the View Certificate button */
+button.certificate-button {
+  border: none;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0px !important;
+}
+
+/* Style the Add to LinkedIn button */
+button.add-to-linkedin-button {
+  border: none;
+  background-color: #e43883;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0px !important;
+}
+
+/* Style the buttons hover state */
+button.certificate-button:hover,
+button.add-to-linkedin-button:hover {
+  background-color: #ab2a62;
+}
+</style>
+<script>
+$(document).ready(function(){
+  if($('.sj-page-lesson').length && typeof skilljarCourseProgress !== 'undefined'){
+    // Check if the certificate object and HTML container exist
+    if (skilljarCourseProgress.certificate && $('#certificate-buttons-container').length) {
+      // Extract the certificate ID from the certificate URL
+      let certificateId = skilljarCourseProgress.certificate.url.split("/").pop();
+
+      // Create the certificate button
+      let certificateButton = document.createElement("button");
+      certificateButton.innerHTML = "View Certificate";
+      certificateButton.classList.add("certificate-button");
+      certificateButton.addEventListener("click", () => {
+        window.location.href = skilljarCourseProgress.certificate.url;
+      });
+
+      // Create the add to LinkedIn button
+      let addToLinkedInButton = document.createElement("button");
+      addToLinkedInButton.innerHTML = "Add to LinkedIn";
+      addToLinkedInButton.classList.add("add-to-linkedin-button");
+      addToLinkedInButton.addEventListener("click", () => {
+        window.location.href = window.location.origin + '/c/' + certificateId + '/add-to-linkedin';
+      });
+
+      // Append the buttons to the container element
+      document.querySelector('#certificate-buttons-container').innerHTML = '';
+      document.querySelector("#certificate-buttons-container").appendChild(certificateButton);
+      document.querySelector("#certificate-buttons-container").appendChild(addToLinkedInButton);
+      document.querySelector("#certificate-buttons-container").style.display = 'flex';
+    }
+  }
+})
+</script>
+<!-- END Add View Certificate and add to LinkedIn button to lesson -->
