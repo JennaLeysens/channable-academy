@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5, h6, div, p, span, button, a, input, select, option, textarea
   left: 0;
   width: 70px; 
   border-bottom: 5px solid black;
+  border-radius: 5px;
 }
 
 #header {
@@ -184,35 +185,56 @@ $(document).ready(function () {
 
 <!-- Add progress bar to lesson footer -->
 <script>
-$(document).ready(function () {
-  $('.next-lesson-button').each(function () {
-    // Create progress bar structure
-    var $progressBarInner = $('<span>', {
+function updateProgress() {
+  $('.full-footer-height-wrapper').each(function () {
+    const $wrapper = $('.lessons-wrapper');
+    if ($wrapper.length === 0) return; // lessons not loaded yet
+
+    const totalLessons = $wrapper.find('a').length;
+    const completedLessons = $wrapper.find('a.lesson-complete').length;
+    const progress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+    // Remove existing progress if it already exists
+    $(this).find('.progress-wrapper').remove();
+
+    // Create elements
+    const $progressLabel = $('<span>', {
+      class: 'cp-lessons',
+      text: `${progress}% completed`
+    });
+
+    const $progressBarInner = $('<span>', {
       class: 'progress-bar-inner button-background',
-      style: 'width: 0%;',
+      style: `width: ${progress}%;`,
       'aria-valuemin': 0,
       'aria-valuemax': 100,
-      'aria-valuenow': 0,
+      'aria-valuenow': progress,
       role: 'progressbar'
     });
 
-    var $progressBar = $('<div>', { class: 'progress-bar' }).append($progressBarInner);
-    $(this).append($progressBar);
+    const $progressBar = $('<div>', { class: 'progress-bar' }).append($progressBarInner);
+    const $progressWrapper = $('<div>', { class: 'progress-wrapper' })
+      .append($progressLabel)
+      .append($progressBar);
 
-    // Count total and completed lessons
-    var $wrapper = $('.lessons-wrapper');
-    var totalLessons = $wrapper.find('a').length;
-    var completedLessons = $wrapper.find('a.lesson-complete').length;
-
-    // Calculate percentage
-    var progress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
-
-    console.log('Total:', totalLessons, 'Completed:', completedLessons, 'Progress:', progress + '%');
-
-    // Update progress bar
-    $progressBarInner.attr('aria-valuenow', progress);
-    $progressBarInner.css('width', progress + '%');
+    $(this).append($progressWrapper);
   });
+}
+
+$(document).ready(function () {
+  // Initial run
+  updateProgress();
+
+  // Optional: re-check every 500ms for 5 seconds in case content loads later
+  let retries = 10;
+  const interval = setInterval(() => {
+    if ($('.full-footer-height-wrapper').length && $('.lessons-wrapper').length) {
+      updateProgress();
+      clearInterval(interval);
+    } else if (--retries < 0) {
+      clearInterval(interval);
+    }
+  }, 500);
 });
 </script>
 <script>
@@ -226,20 +248,23 @@ $(document).ready(function () {
 });
 </script>
 <style>
+
 .sj-ribbon.sj-course-ribbon.sj-ribbon-registered.sj-course-ribbon-registered {
   border: none !important; 
-  background-color: #0f9bd7 !important; 
+  background-color: #e37939 !important; 
   color: #fff !important; 
 }
 
 .sj-ribbon.sj-ribbon-registered {
   border: none !important; 
-  background-color: #0f9bd7 !important; 
+  background-color: #e37939!important; 
   color: #fff !important; 
 }
 
 .sj-ribbon.sj-course-ribbon.sj-ribbon-complete.sj-course-ribbon-complete { 
   color: #fff;
+  background-color: #912d6c;
+  border-color: #912d6c;
 }
 
 .catalog-lower-cta-button {
@@ -278,6 +303,7 @@ $(document).ready(function () {
   left: 0; 
   width: 70px; 
   border-bottom: 5px solid black;
+  border-radius: 5px;
 }
 
 .cp-lessons {
@@ -314,6 +340,10 @@ $(document).ready(function () {
 .progress-bar-inner {
   height: 8px !important;
   border-radius: 4px;
+}
+
+.progress-bar > span {
+  display: block;
 }
 
 .sj-page-curriculum #cp-content .tabs-wrapper-v2 {
@@ -361,6 +391,7 @@ $(document).ready(function() {
   left: 0; 
   width: 70px; 
   border-bottom: 5px solid black;
+  border-radius: 5px;
 }
 
 .dp-summary-wrapper {
@@ -479,10 +510,12 @@ display: none !important;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 8px;
   border-bottom: none !important;
 
 > h2 {
   font-weight: 500 !important;
+  font-size: 30px !important;
 }
 }
 
@@ -503,6 +536,17 @@ display: none !important;
   padding: 25px 25px;  
 }
 
+#catalog-courses a.coursebox-container  {
+  margin-bottom: 28px;
+}
+
+@media (min-width: 1441px) {
+  #catalog-courses a.coursebox-container  {
+    margin: 16px !important;
+    width: 380px;
+  }
+}
+
 .catalog-header > h3 {
   position: relative;
   margin-bottom: 15px !important;
@@ -515,6 +559,7 @@ display: none !important;
   left: 0; 
   width: 10%; 
   border-bottom: 5px solid black;
+  border-radius: 5px;
 }
 
 /* Add line under lesson title */
@@ -525,6 +570,7 @@ display: none !important;
   left: 0; 
   width: 70px; 
   border-bottom: 5px solid black;
+  border-radius: 5px;
 }
 
 .lesson-row.lesson-active + .lesson-number {
@@ -614,6 +660,42 @@ display: none !important;
   font-weight: 600;
 }
 
+.full-footer-height-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.progress-wrapper .cp-lessons {
+  margin-right: 25px; 
+  margin-top: 0 !important;
+}
+
+.full-footer-height-wrapper .progress-bar {
+  order: 0;
+  width: 150px;
+}
+
+.next-lesson-button {
+  order: 1;
+}
+
+.next-lesson-button .lesson-title-label {
+  display: none !important;
+}
+
+.full-footer-height-wrapper .toggle-fullscreen {
+  order: 2;
+}
+
+.next-lesson-button .lesson-title-label {
+  display: none;
+}
+
 #lp-footer .right .next-lesson-button .next-lesson-link {
   position: relative;
   background-color: #0f9bd7;
@@ -627,6 +709,10 @@ display: none !important;
 
 #lp-footer .right .next-lesson-button .next-lesson-link > span {
   margin-right: 10px;
+}
+
+.next-lesson-link {
+  margin-left: 55px !important;
 }
 
 .next-lesson-link::after {
@@ -689,7 +775,7 @@ h3.sjwc-section-title::after {
   background-color: #fff !important; /* White background for unselected */
   border-radius: 5px !important;
   position: relative; /* For positioning the number */
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .lesson-incomplete {
@@ -700,6 +786,10 @@ h3.sjwc-section-title::after {
 #lp-left-nav a.lesson:hover {
   background-color: #cfcde4 !important;
   cursor: pointer !important;
+}
+
+#lp-left-nav .lesson:hover,#lp-left-nav .lesson:hover span  { 
+  color: #000000 !important;
 }
 
 /* Styling for active/selected lesson items (dark blue background and black text by default) */
@@ -762,7 +852,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   lessonItems.forEach((lesson, index) => {
     const numberSpan = document.createElement('span');
-    numberSpan.textContent = `${index + 1}.`;
+    numberSpan.textContent = ${index + 1}.;
     numberSpan.classList.add('lesson-number');
     lesson.appendChild(numberSpan);
   });
