@@ -8,13 +8,13 @@ h1, h2, h3, h4, h5, h6, div, p, span, button, a, input, select, option, textarea
 .course-title {
   position: relative;
   font-weight: 600 !important;
-  margin-bottom: 15px !important;
+  margin-bottom: 35px !important;
 }
 
 .course-title::after {
   content: "";
   position: absolute;
-  bottom: -5px; 
+  bottom: -15px; 
   left: 0;
   width: 70px; 
   border-bottom: 5px solid black;
@@ -398,8 +398,22 @@ $(document).ready(function() {
   border: none !important;
 }
 
+.dp-promo-image-wrapper {
+  overflow: hidden;
+  max-height: 200px;
+}
+
+@media only screen and (min-width: 768px) {
+  .large-6 {
+    width: 65%;
+}
+
+.large-6.dp-summary-wrapper.text-left-v2 {
+  width: 30%;
+}
+
 .top-row-grey.top-row-white-v2.padding-top.padding-side.row-v2 .dp-row-flex-v2 {
-  justify-content: space-between;
+  justify-content: left;
   flex-direction: row-reverse !important;
 }
 
@@ -639,6 +653,10 @@ display: none !important;
   justify-content: flex-end; 
 }
 
+.lesson-title-footer {
+  position: relative !important;
+}
+
 #lp-footer .left .prev-lesson-button {
   background-color: #cfcde6;
   border-radius: 5px;
@@ -852,7 +870,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   lessonItems.forEach((lesson, index) => {
     const numberSpan = document.createElement('span');
-    numberSpan.textContent = ${index + 1}.;
+    numberSpan.textContent = `${index + 1}.`;
     numberSpan.classList.add('lesson-number');
     lesson.appendChild(numberSpan);
   });
