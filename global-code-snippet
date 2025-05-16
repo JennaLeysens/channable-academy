@@ -11,6 +11,10 @@ h1, h2, h3, h4, h5, h6, div, p, span, button, a, input, select, option, textarea
   margin-bottom: 35px !important;
 }
 
+a.coursebox-container.course .coursebox-image img {
+  height: 100%;
+} 
+
 .course-title::after {
   content: "";
   position: absolute;
@@ -643,7 +647,7 @@ display: none !important;
    flex-direction: row;
    align-items: center;
    justify-content: space-between;
-  height: 80px;
+  height: 60px;
   background-color: #f6f6fa !important;
   border: none !important;
   padding: 0px 24px;
@@ -719,10 +723,10 @@ display: none !important;
   background-color: #0f9bd7;
   font-weight: 600;
   border-radius: 5px;
-  padding: 12px;
+  padding: 8px;
   border: none;
   width: 100px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #lp-footer .right .next-lesson-button .next-lesson-link > span {
@@ -784,10 +788,14 @@ h3.sjwc-section-title::after {
 <style>
 /* Style for lesson sidebar */
 
+#lp-left-nav {
+  width: 310px !important;
+}
+
 /* General styling for all lesson items (default white background and black text) */
 #lp-left-nav a.lesson {
   display: block !important;
-  padding: 10px 15px 10px 0 !important;
+  padding: 5px 15px 5px 0 !important;
   margin-bottom: 5px !important;
   text-decoration: none !important;
   background-color: #fff !important; /* White background for unselected */
@@ -828,10 +836,11 @@ h3.sjwc-section-title::after {
 #lp-left-nav a.lesson .lesson-row {
   display: flex !important;
   align-items: center !important;
+  padding: 5px 0 5px 15px;
 }
 
 #lp-left-nav a.lesson .bullet {
-  margin-right: 50px !important; /* Keep for potential spacing adjustments */
+  margin-right: 45px !important; /* Keep for potential spacing adjustments */
 }
 
 #lp-left-nav a.lesson .type-icon {
@@ -845,13 +854,17 @@ h3.sjwc-section-title::after {
 /* Lighten the right sidebar border */
 .lp-left-nav {
   border-right-color: #e0e0e0 !important; /* Example: Light grey */
-  padding: 15px;
+  padding: 15px 10px 15px 10px;
+}
+
+.lp-left-nav .lesson {
+  font-size: 14px !important;
 }
 
 /* Style for the generated numbers */
 .lesson-number {
   position: absolute;
-  left: 52px;
+  left: 44px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.9em;
