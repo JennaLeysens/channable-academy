@@ -1,0 +1,152 @@
+<div class="flip-container">
+<div class="flip-card incorrect-card">
+<div class="flip-card-inner">
+<div class="flip-card-front pink"><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747300513%2Fpink-icon.1747300513328.svg" alt="" /><br />Creates and hosts eCommerce websites for businesses
+<div class="flip-icon-container pink">↻</div>
+</div>
+<div class="flip-card-back"><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747307831%2FX.1747307830988.svg" alt="" /> You're thinking of a platform like Shopify or Magento
+<div class="flip-icon-container">↻</div>
+</div>
+</div>
+</div>
+<div class="flip-card correct-card">
+<div class="flip-card-inner">
+<div class="flip-card-front blue"><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747300658%2Fblue-icon.1747300658418.svg" alt="" /> <br />Manages, optimizes, and distributes your product data across multiple channels
+<div class="flip-icon-container">↻</div>
+</div>
+<div class="flip-card-back"><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747307636%2FV.1747307635969.svg" alt="" /> That's correct!
+<div class="flip-icon-container">↻</div>
+</div>
+</div>
+</div>
+<div class="flip-card incorrect-card">
+<div class="flip-card-inner">
+<div class="flip-card-front yellow"><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747300682%2Fyellow-icon.1747300682441.svg" alt="" /><br />Handles customer service and order fulfillment for online stores
+<div class="flip-icon-container">↻</div>
+</div>
+<div class="flip-card-back"><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747307831%2FX.1747307830988.svg" alt="" />You're thinking of order fulfillment and customer service
+<div class="flip-icon-container">↻</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<style>
+  .flip-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 100px;
+  }
+
+  .flip-card {
+    width: 200px;
+    height: 250px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+.flip-card.correct-card.flipped .flip-card-back {
+  background-color: #e43883;
+}
+
+.flip-card-inner div img {
+  width: 35px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.flip-card-back img {
+   width: 45px !important;
+  margin-bottom: 30px !important;
+}
+
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+.flip-card-front {
+  font-weight: 500;
+}
+
+  .pink {
+    color: #e43883;
+    border: 2px solid #e43883;
+  }
+
+  .blue {
+    color: #0f9bd7;
+    border: 2px solid #0f9bd7;
+  }
+
+  .yellow {
+    color: #f8c521;
+    border: 2px solid #f8c521;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column; /* Changed to column to position icon at the bottom */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+    font-size: 1.3em;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(15, 154, 214, 0.2);
+    background-color: #ffffff;
+    box-sizing: border-box; /* To include padding and border in the element's total width and height */
+  }
+
+  .flip-card-back {
+    color: #fff;
+    transform: rotateY(180deg);
+    font-weight: 500;
+  }
+
+  /* Style for the flip icon */
+  .flip-icon-container {
+    position: absolute;
+    bottom: 5px; /* Adjust as needed to avoid border */
+    right: 5px; /* Adjust as needed to avoid border */
+    font-size: 1.2em; /* Adjust size as needed */
+   border: none !important;
+  }
+
+  /* When flipped and correct */
+  .flip-card.flipped.correct-card .flip-card-back {
+    border-color: #198754;
+  }
+
+  /* When flipped and incorrect */
+  .flip-card.flipped.incorrect-card .flip-card-back {
+    background-color: #cfcde6;
+  }
+</style>
+</div>
+<p>
+<script>
+  // Add click event to all flip cards
+  document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+  });
+</script>
+</p>
