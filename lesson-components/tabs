@@ -1,0 +1,106 @@
+<p><span class="intro-text">There are many ways that you can structure your projects. Let&rsquo;s imagine a retailer selling shoes in Europe.</span></p>
+<p><span class="intro-text">Click the tabs below to see how the retailer uses Channable 👇</span></p>
+<div class="tab-container"><button class="my-tab-button active tab-btn-rounded" data-tab="Company">Company</button> <button class="my-tab-button" data-tab="Project">Project</button> <button class="my-tab-button tab-btn-tall" data-tab="Channel">Channel</button></div>
+<div id="Company" class="my-tab-content tab-content-rounded">
+<h3>Company</h3>
+<p>The shoe retailer only needs to manage its own brand, so they set up a single company.</p>
+<p>This will have projects within it.</p>
+<p><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F7u6jffr8fr7ks9ag5d1bwagc1%2Fpublic%2F1747753965%2FArtboard+4+copy.1747753965495.png" alt="" width="600" /></p>
+</div>
+<div id="Project" class="my-tab-content tab-content-rounded" style="display: none;">
+<h3>Project</h3>
+<p>Within the company, the shoe retailer has set up multiple projects.</p>
+<p>Because they are selling shoes in the UK, France, and Germany, they need to manage their product data in English, French, and German.</p>
+<p>So, they&rsquo;ve set up projects for each of these countries to make it easy for them to manage their product catalogs in each language.</p>
+<p><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F7u6jffr8fr7ks9ag5d1bwagc1%2Fpublic%2F1747754066%2FArtboard+4+copy+2.1747754066609.png" alt="" width="600" /></p>
+</div>
+<div id="Channel" class="my-tab-content tab-content-rounded-sm" style="display: none;">
+<h3>Channel</h3>
+<p>For each country that the shoe retailer sells in, they&rsquo;re listing their products on Google Shopping, and one other channel that is popular in the region.</p>
+<p>Another reason why they have set up a project for each country is because each channel has its own requirements about how the product data it receives should be structured.</p>
+<p>By creating separate projects, it&rsquo;s easy for the retailer to keep the product data organized.</p>
+<p><img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F7u6jffr8fr7ks9ag5d1bwagc1%2Fpublic%2F1747754222%2FArtboard+4+copy+5.1747754221749.png" alt="" width="600" /></p>
+</div>
+<div>
+<style>
+    .intro-text {
+      font-weight: 400;
+      font-size: 13pt;
+    }
+
+    .tab-container {
+      display: flex;
+      z-index: 0;
+    }
+
+    .my-tab-button {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      transition: background-color 0.3s ease;
+      font-size: 13pt;
+      text-align: center;
+      color: #2a2a2a !important;
+      background-color: transparent;
+      margin-bottom: 0;
+    }
+
+    .tab-btn-tall {
+      padding: 20px 16px;
+    }
+
+    .tab-btn-rounded {
+      border-radius: 12px 12px 0 0;
+    }
+
+    .my-tab-button.active {
+      background-color: #e9e8f3 !important;
+      font-weight: 600;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .my-tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #e9e8f3;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      position: relative;
+    }
+
+    .tab-content-rounded {
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .tab-content-rounded-sm {
+      border-top: none;
+      border-radius: 0 0 5px 5px;
+    }
+
+    #Company {
+      display: block;
+    }
+  </style>
+</div>
+<script>
+    $(document).ready(function () {
+      $('.my-tab-button').click(function () {
+        var tabToShow = $(this).data('tab');
+
+        // Reset all buttons
+        $('.my-tab-button').removeClass('active').css('border-radius', '');
+        $('.my-tab-content').hide();
+
+        // Activate clicked tab
+        $(this).addClass('active').css('border-radius', '12px 12px 0 0');
+        $('#' + tabToShow).show();
+      });
+
+      // Set initial state
+      $('.my-tab-button:first').addClass('active').css('border-radius', '12px 12px 0 0');
+      $('.my-tab-content:first').show();
+    });
+  </script>
