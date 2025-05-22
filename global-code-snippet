@@ -778,20 +778,32 @@ display: none !important;
 .toggle-fullscreen {
   position: fixed;
   z-index: 100;
-  left: 302px;
-  top: 110px;
+  left: 265px;
+  top: 92px;
   background-color: #f6f6fa;
   padding: 4px;
   transition: all .2s ease;
+  border-radius: 10px;
+  transition: background-color 0.3s ease; 
+}
+
+.toggle-fullscreen:hover {
+  background-color: #cfcde4;
+}
+
+@media (max-width: 768px) {
+  .toggle-fullscreen {
+    display: none;
+  }
 }
 
 .toggle-fullscreen sjwc-icon img {
-    width: 50px;
-    height: 50px;
+    width: 22px;
+    height: 22px;
 }
 
 .toggle-fullscreen[aria-pressed="true"] {
-    left: 5px;
+    left: 2px;
 }
 
 .next-lesson-button .lesson-title-label {
@@ -857,11 +869,22 @@ h3.sjwc-section-title::after {
 </style>
 
 <style>
-/* START Add softer drop shadow to the left navigation sidebar */
 .lp-left-nav {
     box-shadow: 4px 1px 10px #c7c6cb;
 }
-/* END Add softer drop shadow to the left navigation sidebar */
+
+#lp-left-nav::-webkit-scrollbar {
+  width: 6px; /* Only affects vertical scrollbar */
+}
+
+#lp-left-nav::-webkit-scrollbar-thumb {
+  background-color: #999;   /* Visible thumb */
+  border-radius: 4px;
+}
+
+#lp-left-nav.cbp-spmenu.cbp-spmenu-open::-webkit-scrollbar {
+  display: block;
+}
 </style>
 
 <style>
@@ -873,7 +896,7 @@ h3.sjwc-section-title::after {
 
 @media only screen and (min-width: 768px) {
   #lp-left-nav.cbp-spmenu:not(.cbp-spmenu-open) {
-    left: -280px;
+    left: -270px;
   }
 }
 
