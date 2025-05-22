@@ -20,7 +20,7 @@ a.coursebox-container.course .coursebox-image img {
   position: absolute;
   bottom: -15px; 
   left: 0;
-  width: 70px; 
+  width: 85px; 
   border-bottom: 5px solid black;
   border-radius: 5px;
 }
@@ -184,6 +184,61 @@ $(document).ready(function () {
     $(".sj-text-page-not-found span").html(pageNotFoundMessage)
     $(".sj-text-page-not-found-explanation span").html(errorExplanation)
   }
+});
+</script>
+
+<script>
+$(document).ready(function () {
+  $('.toggle-fullscreen sjwc-icon').each(function () {
+    // Remove the 'name' attribute
+    $(this).removeAttr('name');
+
+    // Remove the <i> icon inside sjwc-icon
+    $(this).find('i.fa.fa-arrows-alt').remove();
+
+    // Append the <img> instead
+    $(this).append('<img src="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747910209%2FCollapse-menu.1747910208294.svg" alt="Toggle Icon" />');
+  });
+});
+</script>
+
+<script>
+$(document).ready(function () {
+  const collapsedIcon = 'https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747910209%2FCollapse-menu.1747910208294.svg';
+  const expandedIcon = 'https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747909913%2FExpand-menu.1747909912029.svg';
+
+  $('.toggle-fullscreen').on('click', function (e) {
+    e.preventDefault();
+
+    const $btn = $(this);
+    const isPressed = $btn.prop('aria-pressed') === true;
+
+    // Toggle aria-pressed using .prop()
+    $btn.prop('aria-pressed', !isPressed);
+
+    // Update the icon src based on new aria-pressed value
+    const $img = $btn.find('sjwc-icon img');
+    if ($img.length) {
+      $img.attr('src', !isPressed ? expandedIcon : collapsedIcon);
+    }
+  });
+
+  // Optional: set initial icon on page load based on aria-pressed
+  $('.toggle-fullscreen').each(function () {
+    const $btn = $(this);
+    const isPressed = $btn.prop('aria-pressed') === true;
+    const $img = $btn.find('sjwc-icon img');
+    if ($img.length) {
+      $img.attr('src', isPressed ? expandedIcon : collapsedIcon);
+    }
+  });
+});
+</script>
+
+<!--Move nav toggle to sidebar-->
+<script>
+$(document).ready(function () {
+  $('#lp-footer .toggle-fullscreen').insertBefore('#lp-left-nav');
 });
 </script>
 
@@ -380,6 +435,8 @@ $(document).ready(function() {
 
 </script>
 <!-- END Change Course Detail Curriculum Page Lessons into Links -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 .dp-summary-wrapper > h1 {
@@ -586,7 +643,7 @@ display: none !important;
   position: absolute;
   bottom: 0;
   left: 0; 
-  width: 100px; 
+  width: 85px; 
   border-bottom: 5px solid black;
   border-radius: 5px;
 }
@@ -714,6 +771,29 @@ display: none !important;
   order: 2;
 }
 
+#left-nav-button {
+  display: none;
+}
+
+.toggle-fullscreen {
+  position: fixed;
+  z-index: 100;
+  left: 302px;
+  top: 110px;
+  background-color: #f6f6fa;
+  padding: 4px;
+  transition: all .2s ease;
+}
+
+.toggle-fullscreen sjwc-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.toggle-fullscreen[aria-pressed="true"] {
+    left: 5px;
+}
+
 .next-lesson-button .lesson-title-label {
   display: none;
 }
@@ -789,6 +869,12 @@ h3.sjwc-section-title::after {
 
 #lp-left-nav {
   width: 310px !important;
+}
+
+@media only screen and (min-width: 768px) {
+  #lp-left-nav.cbp-spmenu:not(.cbp-spmenu-open) {
+    left: -280px;
+  }
 }
 
 /* General styling for all lesson items (default white background and black text) */
