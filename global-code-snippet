@@ -590,7 +590,7 @@ display: none !important;
 
 > h2 {
   font-weight: 500 !important;
-  font-size: 30px !important;
+  font-size: 24px !important;
 }
 }
 
@@ -643,8 +643,8 @@ display: none !important;
   position: absolute;
   bottom: 0;
   left: 0; 
-  width: 85px; 
-  border-bottom: 5px solid black;
+  width: 100%; 
+  border-bottom: 0.75px solid #cfcde4;
   border-radius: 5px;
 }
 
@@ -749,10 +749,28 @@ display: none !important;
   align-items: center;
 }
 
+@media (max-width: 670px) {
+  .progress-wrapper {
+     flex-direction: column;
+  }
+
+  .progress-wrapper .cp-lessons {
+    margin-right: 0 !important;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 450px) {
+  .progress-wrapper {
+     display: none;
+  }
+}
+
 .progress-wrapper .cp-lessons {
   margin-right: 25px; 
   margin-top: 0 !important;
 }
+
 
 .full-footer-height-wrapper .progress-bar {
   order: 0;
@@ -784,7 +802,6 @@ display: none !important;
   padding: 4px;
   transition: all .2s ease;
   border-radius: 10px;
-  transition: background-color 0.3s ease; 
 }
 
 .toggle-fullscreen:hover {
@@ -849,10 +866,11 @@ h3.sjwc-section-title {
   margin-top: 28.125px !important; /* Increased top margin by 25% (22.5px * 1.25) */
   margin-bottom: 45px !important; /* Bottom margin */
   width: fit-content !important;
-  font-size: 26px !important; /* Large text */
-  font-weight: 500 !important; /* Medium 500 text */
+  font-size: 26px !important;
+  font-weight: 600 !important; 
   font-family: 'Montserrat', sans-serif !important; /* Ensure Montserrat is used */
   position: relative !important; /* Needed for absolute positioning of the bar */
+  line-height: 28px !important;
 }
 
 h3.sjwc-section-title::after {
@@ -863,7 +881,7 @@ h3.sjwc-section-title::after {
   display: block !important;
   width: 60px !important;
   border-radius: 5px !important;
-  border-bottom: 5px solid black;
+  border-bottom: 2px solid #181937;
 }
 /* END Style for sjwc-section-title - Final Adjustments */
 </style>
