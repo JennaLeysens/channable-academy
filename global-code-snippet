@@ -882,7 +882,6 @@ h3.sjwc-section-title::after {
 #lp-left-nav a.lesson {
   display: block !important;
   padding: 5px 15px 5px 0 !important;
-  margin-bottom: 5px !important;
   text-decoration: none !important;
   background-color: #fff !important; /* White background for unselected */
   border-radius: 5px !important;
@@ -939,12 +938,14 @@ h3.sjwc-section-title::after {
   max-width: none; 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 #lp-left-nav a.lesson .sj-lesson-time {
   font-size: 10px;
   width: 10%;
   line-height: 1;
+  color:  #cfcde4;
 }
 
 .sj-lesson-time::before,
