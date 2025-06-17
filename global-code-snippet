@@ -202,39 +202,6 @@ $(document).ready(function () {
 });
 </script>
 
-<script>
-$(document).ready(function () {
-  const collapsedIcon = 'https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747910209%2FCollapse-menu.1747910208294.svg';
-  const expandedIcon = 'https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747909913%2FExpand-menu.1747909912029.svg';
-
-  $('.toggle-fullscreen').on('click', function (e) {
-    e.preventDefault();
-
-    const $btn = $(this);
-    const isPressed = $btn.prop('aria-pressed') === true;
-
-    // Toggle aria-pressed using .prop()
-    $btn.prop('aria-pressed', !isPressed);
-
-    // Update the icon src based on new aria-pressed value
-    const $img = $btn.find('sjwc-icon img');
-    if ($img.length) {
-      $img.attr('src', !isPressed ? expandedIcon : collapsedIcon);
-    }
-  });
-
-  // Optional: set initial icon on page load based on aria-pressed
-  $('.toggle-fullscreen').each(function () {
-    const $btn = $(this);
-    const isPressed = $btn.prop('aria-pressed') === true;
-    const $img = $btn.find('sjwc-icon img');
-    if ($img.length) {
-      $img.attr('src', isPressed ? expandedIcon : collapsedIcon);
-    }
-  });
-});
-</script>
-
 <!--Move nav toggle to sidebar-->
 <script>
 $(document).ready(function () {
@@ -509,17 +476,6 @@ border-radius: 10px;
 padding: 25px !important;
 }
 
-.dp-long-description {
-  background-color: #0f9bd7; 
-  padding: 25px !important;
-  color: #fff; 
-  border-radius: 10px;
-}
-
-.dp-long-description > h3 {
-    color: #fff; 
-}
-
 .section-container .title > .focus-link-v2 {
   font-size: 20px !important;
   font-weight: 600;
@@ -651,6 +607,10 @@ display: none !important;
 .lesson-row.lesson-active + .lesson-number {
   color: #000 !important;
   font-weight: 700;
+}
+
+#lp-left-nav a.lesson > span {
+  display: none;
 }
 
 .lesson-complete .lesson-number {
@@ -866,8 +826,8 @@ h3.sjwc-section-title {
   margin-top: 28.125px !important; /* Increased top margin by 25% (22.5px * 1.25) */
   margin-bottom: 45px !important; /* Bottom margin */
   width: fit-content !important;
-  font-size: 26px !important;
-  font-weight: 600 !important; 
+  font-size: 28px !important;
+  font-weight: 800 !important; 
   font-family: 'Montserrat', sans-serif !important; /* Ensure Montserrat is used */
   position: relative !important; /* Needed for absolute positioning of the bar */
   line-height: 28px !important;
@@ -950,7 +910,6 @@ h3.sjwc-section-title::after {
 #lp-left-nav .current-item {
   color: #000 !important; /* Black text for selected when not hovered */
   font-weight: 700 !important; /* Make the font bold when active */
-  /* Removed the problematic background: #8f8dc2; */
 }
 
 /* Force transparency on the active lesson to remove the box */
@@ -966,7 +925,7 @@ h3.sjwc-section-title::after {
 }
 
 #lp-left-nav a.lesson .bullet {
-  margin-right: 45px !important; /* Keep for potential spacing adjustments */
+  margin-right: 20px !important; /* Keep for potential spacing adjustments */
 }
 
 #lp-left-nav a.lesson .type-icon {
@@ -975,6 +934,22 @@ h3.sjwc-section-title::after {
 
 #lp-left-nav a.lesson .title {
   flex-grow: 1 !important;
+  font-size: 12px;
+  width: 80%;
+  max-width: none; 
+  display: flex;
+  justify-content: space-between;
+}
+
+#lp-left-nav a.lesson .sj-lesson-time {
+  font-size: 10px;
+  width: 10%;
+  line-height: 1;
+}
+
+.sj-lesson-time::before,
+.sj-lesson-time::after {
+    content: none !important;
 }
 
 /* Lighten the right sidebar border */
@@ -987,21 +962,74 @@ h3.sjwc-section-title::after {
   font-size: 14px !important;
 }
 
-/* Style for the generated numbers */
-.lesson-number {
-  position: absolute;
-  left: 44px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.9em;
-  color: #333; /* Adjust color */
-  width: 20px; /* Adjust width for alignment */
-  text-align: right;
-  transition: color 0.3s ease-in-out; /* Optional: Add a smooth transition */
-}
-
 /* END Style for lesson sidebar */
 </style>
+
+<script>
+$(document).ready(function () {
+  const collapsedIcon = 'https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747910209%2FCollapse-menu.1747910208294.svg';
+  const expandedIcon = 'https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F9dbmpb2jo4wplfm8l5n8h377y%2Fpublic%2F1747909913%2FExpand-menu.1747909912029.svg';
+
+  const $btn = $('.toggle-fullscreen');
+  const $nav = $('#lp-left-nav');
+  const $wrapper = $('#lp-wrapper');
+
+  // Ensure body has required classes for CSS
+  $('body').addClass('cbp-spmenu-fixed sj-page-lesson');
+
+  // Set nav open/closed on load based on aria-pressed
+  const isPressed = $btn.prop('aria-pressed') === true;
+
+  if (window.innerWidth >= 768) {
+    if (!isPressed) {
+      $nav.addClass('cbp-spmenu-open');
+      $('body').removeClass('lesson-fullscreen');
+      $wrapper.css('margin-left', '320px');
+    } else {
+      $nav.removeClass('cbp-spmenu-open');
+      $('body').addClass('lesson-fullscreen');
+      $wrapper.css('margin-left', '0');
+    }
+  }
+
+  // Toggle nav + body class + icon + wrapper margin
+  $btn.on('click', function (e) {
+    e.preventDefault();
+
+    const $this = $(this);
+    const wasPressed = $this.prop('aria-pressed') === true;
+    const nowPressed = !wasPressed;
+    $this.prop('aria-pressed', nowPressed);
+
+    if (window.innerWidth >= 768) {
+      if (nowPressed) {
+        $nav.removeClass('cbp-spmenu-open');
+        $('body').addClass('lesson-fullscreen');
+        $wrapper.css('margin-left', '0');
+      } else {
+        $nav.addClass('cbp-spmenu-open');
+        $('body').removeClass('lesson-fullscreen');
+        $wrapper.css('margin-left', '320px');
+      }
+    }
+
+    const $img = $this.find('sjwc-icon img');
+    if ($img.length) {
+      $img.attr('src', nowPressed ? collapsedIcon : expandedIcon);
+    }
+  });
+
+  // Set icon on load
+  $btn.each(function () {
+    const $this = $(this);
+    const isPressed = $this.prop('aria-pressed') === true;
+    const $img = $this.find('sjwc-icon img');
+    if ($img.length) {
+      $img.attr('src', isPressed ? collapsedIcon : expandedIcon);
+    }
+  });
+});
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1010,7 +1038,6 @@ document.addEventListener('DOMContentLoaded', function() {
   lessonItems.forEach((lesson, index) => {
     const numberSpan = document.createElement('span');
     numberSpan.textContent = `${index + 1}.`;
-    numberSpan.classList.add('lesson-number');
     lesson.appendChild(numberSpan);
   });
 });
